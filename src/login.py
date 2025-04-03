@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import js2py
 import os
 import requests.structures
+from ..utils import mkdirp
 
 # Get the directory of the current file
-current_file_directory = os.path.dirname(os.path.abspath(__file__))
-root_directory = os.path.abspath(os.path.join(current_file_directory, "../"))
+root_directory = os.path.abspath(os.getcwd())
 
 
 class UESTC_login:
@@ -49,6 +49,7 @@ class UESTC_login:
         if encrypt_js.status_code != 200:
             raise ConnectionError(f"Failed to connect to {encrypt_url}, code: {encrypt_js.status_code}")
         
+        mkdirp(f'{root_directory}/javascript')
         with open(f'{root_directory}/javascript/encrypt.js', 'w') as f:
             f.write(encrypt_js.text)
 

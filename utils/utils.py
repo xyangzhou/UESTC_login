@@ -3,6 +3,7 @@ from typing import Any, Dict
 from ics import Calendar, Event
 from datetime import datetime
 import pytz
+import os
 
 tz = pytz.timezone("Asia/Shanghai")
 
@@ -36,3 +37,7 @@ def JSON2ICS(data: Dict[str, Any], timetable:Dict[str, Dict[str, str]], save_pat
 
 def JSON2CSV(data: Dict[str, Any], timetable:Dict[str, Dict[str, str]], save_path: str) -> None:
     pass
+
+def mkdirp(dir_path: str) -> None:
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
